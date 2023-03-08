@@ -12,12 +12,9 @@ digraph {
 	J [label="Variable J"]
 	K [label="Variable K"]
 	A -> B
-	B -> H
-	E -> H
 	F -> G
-	F -> I
 	G -> H
+	H -> I
 	I -> H
 	J -> F
-	K -> H
 }

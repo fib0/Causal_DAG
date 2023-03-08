@@ -12,17 +12,46 @@ digraph {
 	J [label="Variable J"]
 	K [label="Variable K"]
 	A -> B
+	A -> C
+	A -> E
 	A -> H
+	A -> I
+	B -> C
 	B -> H
+	B -> I
+	C -> B
+	C -> E
+	D -> B
+	D -> C
+	D -> E
+	E -> C
 	E -> H
+	E -> I
+	F -> B
+	F -> C
+	F -> E
 	F -> G
 	F -> H
 	F -> I
+	G -> B
+	G -> C
 	G -> H
+	H -> B
+	H -> E
+	H -> I
+	I -> B
+	I -> E
 	I -> H
+	J -> B
+	J -> C
+	J -> E
 	J -> F
 	J -> G
 	J -> H
 	J -> I
+	K -> B
+	K -> C
+	K -> E
 	K -> H
+	K -> I
 }

@@ -1,0 +1,33 @@
+// Causal DAG
+digraph {
+	A [label="Variable A"]
+	B [label="Variable B"]
+	C [label="Variable C"]
+	D [label="Variable D"]
+	E [label="Variable E"]
+	F [label="Variable F"]
+	G [label="Variable G"]
+	H [label="Variable H"]
+	I [label="Variable I"]
+	J [label="Variable J"]
+	K [label="Variable K"]
+	A -> B
+	A -> H
+	A -> I
+	B -> H
+	B -> I
+	E -> H
+	E -> I
+	F -> G
+	F -> H
+	F -> I
+	G -> H
+	H -> I
+	I -> H
+	J -> F
+	J -> G
+	J -> H
+	J -> I
+	K -> H
+	K -> I
+}
