@@ -112,8 +112,8 @@ class CausalDAG:
             for value in list(graph[key]):
                 dot.edge(f'{key}', f'{value}')
 
-        dot.render(f'{graph_type}.gv').replace('\\', '/')
-        'doctest-output/round-table.gv.pdf'
+        dot.render(f'graphs/{graph_type}.gv').replace('\\', '/')
+        'graphs/doctest-output/round-table.gv.pdf'
 
 
 # Our method
@@ -140,7 +140,8 @@ class CausalDAGalter:
         pca.fit(data)
         loadings = pca.components_.T * np.sqrt(pca.explained_variance_)
         self.loading_matrix = pd.DataFrame(loadings, columns=[f"PC{i+1}" for i in range(num_components)], index=self.variables)
-        self.loading_matrix[abs(self.loading_matrix) < 0.2 ] = 0 
+        # Euristic Criterion to handle low factor loadings (won't work for multiple principal components)
+        self.loading_matrix[abs(self.loading_matrix) < 0.04 * self.num_components] = 0  
 
     def test1(self, X1: str, X2: str):
         """
@@ -223,8 +224,8 @@ class CausalDAGalter:
             for value in list(graph[key]):
                 dot.edge(f'{key}', f'{value}')
 
-        dot.render(f'custom_{graph_type}_{self.num_components}.gv').replace('\\', '/')
-        'graphs/doctest-output/round-table.gv.pdf'
+        dot.render(f'graphs/custom_{graph_type}_pc={self.num_components}.gv').replace('\\', '/')
+        'graphs/round-table.gv.pdf'
 
 
 if __name__ == "__main__":
@@ -238,12 +239,13 @@ if __name__ == "__main__":
     dag1.hierarchical_dag
     dag1.visualize(graph_type="hierarchical_dag")
 
-    # Custom Method
-    dag2 = CausalDAGalter(data, num_components=7)
-    dag2.discover_dag()
-    dag2.visualize(graph_type="dag")
-    dag2.discover_hierarchical_dag()
-    dag2.visualize(graph_type="hierarchical_dag")
+    # Custom Method (using different number of PC : theoretically optimal is #PC = 7)
+    for num_components_ in range(1, 9):
+        dag2 = CausalDAGalter(data, num_components=num_components_)
+        dag2.discover_dag()
+        dag2.visualize(graph_type="dag")
+        dag2.discover_hierarchical_dag()
+        dag2.visualize(graph_type="hierarchical_dag")
         
 
          
