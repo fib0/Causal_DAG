@@ -223,8 +223,8 @@ class CausalDAGalter:
             for value in list(graph[key]):
                 dot.edge(f'{key}', f'{value}')
 
-        dot.render(f'custom_{graph_type}.gv').replace('\\', '/')
-        'doctest-output/round-table.gv.pdf'
+        dot.render(f'custom_{graph_type}_{self.num_components}.gv').replace('\\', '/')
+        'graphs/doctest-output/round-table.gv.pdf'
 
 
 if __name__ == "__main__":
@@ -241,7 +241,7 @@ if __name__ == "__main__":
     # Custom Method
     dag2 = CausalDAGalter(data, num_components=7)
     dag2.discover_dag()
-    dag2.visualize()
+    dag2.visualize(graph_type="dag")
     dag2.discover_hierarchical_dag()
     dag2.visualize(graph_type="hierarchical_dag")
         
